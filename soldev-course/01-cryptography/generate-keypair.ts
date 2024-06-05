@@ -22,13 +22,22 @@ const keypair = await crypto.subtle.generateKey('Ed25519', true, ['sign', 'verif
 const publicKeyData = await crypto.subtle.exportKey('raw', keypair.publicKey);
 const privateKeyData = await crypto.subtle.exportKey('pkcs8', keypair.privateKey);
 
-const publicKey = new Uint8Array(publicKeyData)
-const privateKey = new Uint8Array(privateKeyData)
+console.log(`The public key is:`, publicKeyData, publicKeyData.byteLength);
 
-// We can now convert the keys to a base58 string
-console.log(`The public key is:`, codec.decode(publicKey));
-console.log(`The private key is:`, codec.decode(privateKey));
-console.log(`✅ Finished!`);
+const publicKey = new Uint8Array(publicKeyData)
+const privateKey = new Uint8Array(privateKeyData).slice(16)
+
+console.log(`The public key is:`, publicKey, publicKey.length);
+console.log(`The private key is:`, privateKey, privateKey.length);
+
+// We can now convert the keys to a base58 string using the codec
+const publicKeyBase58 = codec.decode(publicKey);
+const privateKeyBase58 = codec.decode(privateKey);
+const fullKey = codec.decode(new Uint8Array([...privateKey, ...publicKey]))
+
+console.log(`The public key is:`, publicKeyBase58, publicKeyBase58.length);
+console.log(`The private key is:`, privateKeyBase58, privateKeyBase58.length);
+console.log('Full key', fullKey)
 
 // To learn more about the WebCrypto API, visit the MDN Web Docs:
 // https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API
