@@ -1,15 +1,19 @@
 {
-  "name": "solana-example-sandbox",
-  "type": "module",
-  "devDependencies": {
-    "@types/bun": "latest"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
-  },
-  "dependencies": {
-    "@solana/codecs": "^2.0.0-preview.3",
-    "@solana/keys": "^2.0.0-preview.3",
-    "dotenv": "^16.4.5"
-  }
+	"name": "solana-example-sandbox",
+	"type": "module",
+	"scripts": {
+		"check": "biome check --write"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.8.0",
+		"@types/bun": "latest"
+	},
+	"peerDependencies": {
+		"typescript": "^5.0.0"
+	},
+	"dependencies": {
+		"@solana/codecs": "^2.0.0-preview.3",
+		"@solana/keys": "^2.0.0-preview.3",
+		"dotenv": "^16.4.5"
+	}
 }
